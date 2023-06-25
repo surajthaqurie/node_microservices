@@ -9,15 +9,15 @@ app.use(cors());
 // event bus data store
 const events = [];
 
-app.post("/events", async (req, res) => {
+app.post("/events", (req, res) => {
   const event = req.body;
 
   events.push(event);
 
-  await axios.post("http://localhost:4000/events", event); // post service
-  await axios.post("http://localhost:4001/events", event); // comment service
-  await axios.post("http://localhost:4002/events", event); // query service
-  await axios.post("http://localhost:4003/events", event); // moderation comment service
+  axios.post("http://localhost:4000/events", event); // post service
+  axios.post("http://localhost:4001/events", event); // comment service
+  axios.post("http://localhost:4002/events", event); // query service
+  axios.post("http://localhost:4003/events", event); // moderation comment service
 
   res.send({ status: "OK" });
 });
