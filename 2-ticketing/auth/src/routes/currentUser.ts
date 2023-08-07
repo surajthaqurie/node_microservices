@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 const router = express.Router();
-import { currentUser } from "../middlewares/current-user";
-import { requireAuth } from "../middlewares/require-auth";
+import { currentUser, requireAuth } from "@ticketing_microservice/common";
+// import { requireAuth } from "../middlewares/require-auth";
 
 router.get(
   "/api/users/current-user",
