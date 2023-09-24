@@ -1,12 +1,7 @@
 import { Stan } from "node-nats-streaming";
-import { Subjects } from "../enums";
+import { IBasePublisherEvent } from "../interfaces";
 
-interface IEvent {
-  subject: Subjects;
-  data: any;
-}
-
-export abstract class Publisher<T extends IEvent> {
+export abstract class Publisher<T extends IBasePublisherEvent> {
   abstract subject: T["subject"];
   private client: Stan;
 
@@ -16,7 +11,7 @@ export abstract class Publisher<T extends IEvent> {
 
   publish(data: T["data"]): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.client.publish(this.subject, JSON.stringify(data), (err) => {
+      this.client.publish(this.subject, JSON.stringify(data), (err: any) => {
         if (err) return reject(err);
         console.log("Event published to subject", this.subject);
         resolve();
