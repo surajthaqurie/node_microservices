@@ -16,8 +16,21 @@ spec:
         - name: ticket
           image: surajthaqurie/ticketing-ticket
           env:
+            - name: NAST_URL
+              value: "http://nats-server:4222"
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
             - name: MONGO_URI
               value: "mongodb://ticket-mongo-srv:27017/tickets"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-sercet
+                  key: JWT_KEY
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
