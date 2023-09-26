@@ -7,6 +7,8 @@ import {
   validateRequest,
   NotAuthorizedError,
 } from "@ticketing_microservice/common";
+import { TicketUpdatedPublisher } from "../events/publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -32,7 +34,15 @@ router.put(
     ticket.set({ title, price });
     await ticket.save();
 
-    res.send(ticket);
+    // publish an event
+    await new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
+
+    return res.send(ticket);
   }
 );
 

@@ -38,7 +38,7 @@ router.post(
       userId: ticket.userId,
     });
 
-    res.status(201).send(ticket);
+    return res.status(201).send(ticket);
   }
 );
 
