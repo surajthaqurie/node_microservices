@@ -3,7 +3,7 @@ import { IBasePublisherEvent } from "../interfaces";
 
 export abstract class Publisher<T extends IBasePublisherEvent> {
   abstract subject: T["subject"];
-  private client: Stan;
+  protected client: Stan;
 
   constructor(client: Stan) {
     this.client = client;
