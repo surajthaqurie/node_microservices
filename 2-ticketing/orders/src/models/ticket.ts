@@ -6,12 +6,12 @@ interface TicketAttrs {
   id: string;
   title: string;
   price: number;
-  version: number;
 }
 
 export interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
+  version: number;
   isReserved(): Promise<boolean>;
 }
 
@@ -48,8 +48,15 @@ const ticketSchema = new mongoose.Schema(
 ticketSchema.set("versionKey", "version");
 ticketSchema.plugin(updateIfCurrentPlugin);
 
+// ticketSchema.pre("save", function (done) {
+//   this.$where = {
+//     version: this.get("version") - 1,
+//   };
+//   done();
+// });
+
 ticketSchema.statics.findByEvent = (event: { id: string; version: number }) => {
-  return Ticket.findOne({ id: event.id, version: event.version - 1 });
+  return Ticket.findOne({ _id: event.id, version: event.version - 1 });
 };
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
