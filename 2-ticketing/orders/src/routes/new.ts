@@ -1,12 +1,6 @@
 import mongoose from "mongoose";
 import express, { Request, Response } from "express";
-import {
-  BadRequestError,
-  NotFoundError,
-  OrderStatus,
-  requireAuth,
-  validateRequest,
-} from "@ticketing_microservice/common";
+import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from "@ticketing_microservice/common";
 import { body } from "express-validator";
 
 import { OrderCreatedPublisher } from "../events/publisher";
@@ -17,7 +11,7 @@ import { Order } from "../models/order";
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 60 * 15;
+const EXPIRATION_WINDOW_SECONDS = 1 * 60;
 
 router.post(
   "/api/orders",

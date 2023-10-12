@@ -2,11 +2,7 @@ import express from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
 
-import {
-  errorHandler,
-  NotFoundError,
-  currentUser,
-} from "@ticketing_microservice/common";
+import { errorHandler, NotFoundError, currentUser } from "@ticketing_microservice/common";
 
 import { createTicketRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";

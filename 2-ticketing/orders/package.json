@@ -4,14 +4,15 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --no-cache",
-    "start": "ts-node-dev src/index.ts"
+    "start": "ts-node-dev src/index.ts",
+    "update:common": "npm un @ticketing_microservice/common && npm i @ticketing_microservice/common"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@ticketing_microservice/common": "^1.0.11",
+    "@ticketing_microservice/common": "^1.0.14",
     "cookie-session": "^2.0.0",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
