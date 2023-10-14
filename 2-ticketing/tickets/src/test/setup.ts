@@ -39,11 +39,11 @@ afterAll(async () => {
 });
 
 //@ts-expect-error
-global.signin = (id?: string) => {
+global.signin = () => {
   // Build a JWT payload {id, email}
 
   const payload = {
-    id: id || new mongoose.Types.ObjectId().toHexString(),
+    id: new mongoose.Types.ObjectId().toHexString(),
     email: "test@test.com",
   };
 

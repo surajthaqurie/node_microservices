@@ -2,6 +2,9 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest, BadRequestError, NotFoundError, NotAuthorizedError, OrderStatus } from "@ticketing_microservice/common";
 import { Order } from "../model/order";
+import { Payment } from "../model/payment";
+
+import { stripe } from "../stripe";
 
 const router = express.Router();
 
@@ -20,7 +23,20 @@ router.post(
 
     if (order.status === OrderStatus.Cancelled) throw new BadRequestError("Cannot pay fot an cancelled order");
 
-    return res.send({ success: true });
+    const charge = await stripe.charges.create({
+      currency: "usd",
+      amount: order.price * 100,
+      source: token,
+    });
+
+    const payment = Payment.build({
+      orderId,
+      stripeId: charge.id,
+    });
+
+    await payment.save();
+
+    return res.status(201).send({ success: true });
   }
 );
 
