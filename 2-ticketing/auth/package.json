@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --watchAll --no-cache",
     "start": "ts-node-dev src/index.ts",
-    "test:ci": "`jest`"
+    "test:ci": "jest"
   },
   "keywords": [],
   "author": "",

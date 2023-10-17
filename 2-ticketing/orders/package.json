@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --watchAll --no-cache",
     "start": "ts-node-dev src/index.ts",
-    "update:common": "npm un @ticketing_microservice/common && npm i @ticketing_microservice/common"
+    "update:common": "npm un @ticketing_microservice/common && npm i @ticketing_microservice/common",
+    "test:ci": "jest"
   },
   "keywords": [],
   "author": "",
