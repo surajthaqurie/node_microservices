@@ -8,6 +8,8 @@ import { ExpirationCompleteListener } from "./events/listener/expiration-complet
 import { PaymentCreatedListener } from "./events/listener/payment-created-listener";
 
 const start = async () => {
+  console.log("Starting order service...........");
+
   if (!process.env.JWT_KEY) throw new Error("JWT_KEY must be defined");
   if (!process.env.MONGO_URI) throw new Error("MONGO_URI must be defined");
   if (!process.env.NAST_URL) throw new Error("NAST_URL must be defined");
