@@ -1,13 +1,24 @@
-name: tests-auth
+name: build-app
 
 on:
   pull_request:
-    paths:
-      - "2-ticketing/auth/**"
+    branches:
+      - "main"
+    types: [closed]
 
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: cd 2-ticketing/auth && npm install && npm run test:ci
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: ready for build
+        run: echo "Ready for build"
+
+      - name: build for production
+        run: npm run prod
+
+      - name: success message
+        run: echo "Build successfully"
